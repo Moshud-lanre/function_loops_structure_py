@@ -28,12 +28,9 @@ def calculate_subtotal(order):
     price = 0
     
     for item in order:
-        for k, v in menu.items():
-             if item == v['name']:
-                  price += v['price']
-    
-    return price
-
+        price += item['price']
+   
+    return round(price, 2)
     raise NotImplementedError()
 
 def calculate_tax(subtotal):
@@ -50,7 +47,8 @@ def calculate_tax(subtotal):
     """
     print('Calculating tax from subtotal...')
     ### WRITE SOLUTION HERE
-
+    tax = subtotal * 0.15
+    return round(tax, 2)
     raise NotImplementedError()
 
 def summarize_order(order):
@@ -70,8 +68,23 @@ def summarize_order(order):
         return names, total
 
     """
-    print_order(order)
+    # print_order(order)
+
     ### WRITE SOLUTION HERE
+    items = []
+    price = 0
+    tax = 0
+    total = 0
+    
+    
+    for item in order:
+        items.append(item['name'])
+        price += item['price']
+        continue
+    tax = price * 0.15
+    total = round(price + tax, 2)
+
+    return items, total
 
     raise NotImplementedError()
 
@@ -108,15 +121,16 @@ Feel free to change, uncomment, and add these as you wish.
 def main():
     order = take_order()
     print_order(order)
-    # print(menu[1]['name'])
 
     subtotal = calculate_subtotal(order)
     print("Subtotal for the order is: " + str(subtotal))
 
-    # tax = calculate_tax(subtotal)
-    # print("Tax for the order is: " + str(tax))
+    tax = calculate_tax(subtotal)
+    print("Tax for the order is: " + str(tax))
 
-    # items, subtotal = summarize_order(order)
+    items, subtotal = summarize_order(order)
+    print("Your order: " + str(items))
+    print("Total price of order: " + str(subtotal))
 
 if __name__ == "__main__":
     main()
